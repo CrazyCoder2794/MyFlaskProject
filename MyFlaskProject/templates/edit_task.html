@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h2>Welcome   <small>{{session.username}}</small></h2>
+    <div class="container">
+
+    <form class="well form-horizontal" action="" method="POST"  id="contact_form">
+<fieldset>
+
+<!-- Form Name -->
+<legend><center><h2><b>Edit To Do</b></h2></center></legend><br>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Task</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="task" placeholder="Enter your to do" class="form-control" id="task"  type="text" required>
+    </div>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Deadline</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="deadline" placeholder="enter the deadline date and time" class="form-control" id="deadline" type="text" required >
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"><br>
+    <input type="submit" class="btn btn-success" value="Submit" id="submit">
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+    </div><!-- /.container -->
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block body %}
+<h2>Welcome   <small>{{session.username}}</small></h2>
+<a class="btn btn-success" href="/add_task.html">Add Task</a>
+<hr>
+ <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Task</th>
+      <th>Deadline</th>
+      <th></th>
+      <th></th>
+    </tr>
+    
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.id}}</td>
+        <td>{{task.task}}</td>
+        <td>{{task.deadline}}</td>
+        <td><a href="edit_task/{{task.id}}" class="btn btn-default pull-right">Edit</a></td>
+        <td><a href="delete_task/{{task.id}}" class="btn btn-danger">Delete</a></td>
+      </tr>
+    {% endfor %}
+    
+  </table>
+
+{% endblock %}

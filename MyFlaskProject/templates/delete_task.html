@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h2>Welcome   <small>{{session.username}}</small></h2>
+    <div class="container">
+
+    <form class="well form-horizontal" action="" method="POST"  id="contact_form">
+<fieldset>
+
+<!-- Form Name -->
+<legend><center><h2><b>Delete To Do</b></h2></center></legend><br>
+
+<!-- Text input-->
+<b><p class="lead">Are you sure you want to delete?</p><b>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4"><br>
+    <input type="submit" class="btn btn-danger" value="Delete" id="submit">
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+    </div><!-- /.container -->
+{% endblock %}
