@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2018 at 08:30 AM
+-- Generation Time: May 08, 2018 at 09:38 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `todo` (
   `id` int(11) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `task` varchar(200) NOT NULL,
-  `deadline` varchar(20) NOT NULL
+  `deadline` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,8 +40,7 @@ CREATE TABLE `todo` (
 --
 
 INSERT INTO `todo` (`id`, `username`, `task`, `deadline`) VALUES
-(8, 'Vignesh2794', 'submit assignment', 'Wednesday 09/05/2018'),
-(9, '2012bcs1023', 'pull the assignment to github', 'Wednesday 09/05/2018');
+(17, 'Vignesh2794', 'Complete assignment', '2018-05-09');
 
 -- --------------------------------------------------------
 
@@ -53,7 +52,7 @@ CREATE TABLE `users` (
   `name` varchar(40) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `username` varchar(50) NOT NULL,
-  `PASSWORD` varchar(40) NOT NULL
+  `PASSWORD` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -61,8 +60,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`name`, `email`, `username`, `PASSWORD`) VALUES
-('Vignesh', '2308anand@gmail.com', '2012bcs1023', '1234'),
-('Vignesh', 'j.vignesh2794@gmail.com', 'Vignesh2794', 'Vignesh');
+('Vignesh', 'j.vignesh2794@outlook.com', 'Vignesh2794', '$5$rounds=535000$/YAFTektOCKl7ZGf$sosJCrgPDf5FPje7.kAEL6IV/p2pznp9ugcxSoIHe14');
 
 --
 -- Indexes for dumped tables
@@ -90,7 +88,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `todo`
 --
 ALTER TABLE `todo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
