@@ -1,7 +1,8 @@
 from flask import Flask, render_template,request,redirect,session
 import MySQLdb
+from passlib.hash import sha256_crypt
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = 'some secret string here'
 
 @app.route('/')
 def index():
@@ -20,7 +21,7 @@ def register():
 	if request.method=='POST':
 		name=request.form['name']
 		user=request.form['username']
-		password=request.form['password']
+		password = sha256_crypt.encrypt(str(request.form['password']))
 		email=request.form['email']
 		cur = db.cursor()
 		cur.execute("INSERT INTO users(name, email, username, password) VALUES(%s, %s, %s, %s)", (name, email, user, password))
@@ -37,9 +38,13 @@ def login():
 		password=request.form["password"]
 		db = MySQLdb.connect("localhost","root","","myflask" )
 		cur = db.cursor()
-		if cur.execute("SELECT * FROM users WHERE username=%s and password =%s", [username,password]) > 0:
-			session['username']=username
-			return redirect('/my_dashboard.html')
+		if cur.execute("SELECT * FROM users WHERE username=%s", [username]) > 0:
+			d=cur.fetchone()[3]
+			if sha256_crypt.verify(password, d):
+				session['username']=username
+				return redirect('/my_dashboard.html')
+			else:
+				return redirect('/invalid.html')
 		else:
 			return redirect('/invalid.html')
 	return render_template('/login.html')
@@ -103,7 +108,16 @@ def edit_task(id):
 		db.commit()
 		cur.close()
 		return redirect('/my_dashboard.html')
-	return render_template('/edit_task.html')
+	cur=db.cursor()
+	cur.execute("SELECT * FROM todo where id=%s",[id])
+	data=cur.fetchall()
+	l=[]
+	di={}
+	for i in data:
+		di = {'id': i[0], 'username': i[1], 'task': str(i[2]),'deadline': i[3]}
+		l.append(di)
+	cur.close()
+	return render_template('/edit_task.html',data=di)
 
 
 @app.route('/delete_task/<string:id>',methods=['GET','POST'])
@@ -120,5 +134,4 @@ def delete_task(id):
 	return render_template('/delete_task.html')
 
 if __name__=='__main__': 
-	app.config['SECRET_KEY'] = 'some secret string here'
 	app.run(debug=True)
